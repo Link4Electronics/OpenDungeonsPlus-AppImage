@@ -11,6 +11,7 @@ pacman -Syu --noconfirm \
     boost-libs \
     cmake      \
     ogre       \
+    ois        \
     pugixml    \
     pybind11   \
     python     \
@@ -24,10 +25,19 @@ get-debloated-pkgs --add-common --prefer-nano
 make-aur-package cegui
 
 # If the application needs to be manually built that has to be done down here
-git clone https://github.com/tomluchowski/OpenDungeonsPlus
+echo "Making nightly build of OpenDungeonsPlus..."
+echo "---------------------------------------------------------------"
+REPO="https://github.com/tomluchowski/OpenDungeonsPlus"
+VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
+git clone "$REPO" ./OpenDungeonsPlus
+echo "$VERSION" > ~/version
 
 mkdir -p ./AppDir/bin
+cd ./OpenDungeonsPlus
+mkdir build && cd build
 cmake .. \
     -DCMAKE_BUILD_TYPE=Release \
     -DOD_TREAT_WARNINGS_AS_ERRORS=OFF \
     -DPYBIND11_FINDPYTHON=ON
+make -j$(nproc)
+mv -v opendungeons-plus ../../AppDir/bin
