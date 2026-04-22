@@ -7,7 +7,7 @@
 [![Latest Stable Release](https://img.shields.io/github/v/release/pkgforge-dev/OpenDungeonsPlus-AppImage)](https://github.com/pkgforge-dev/OpenDungeonsPlus-AppImage/releases/latest)
 
 <p align="center">
-  <img src="https://imgproxy.flathub.org/insecure/dpr:1/f:avif/q:100/rs:fit:128:128/aHR0cHM6Ly9kbC5mbGF0aHViLm9yZy9tZWRpYS9pby9naXRodWIvdG9tbHVjaG93c2tpLk9wZW5EdW5nZW9uc1BsdXMvYjJjZTc2MTZlMThhMTBlYzI4MTNmMzYyY2QwYWI0MWQvaWNvbnMvMTI4eDEyOC9pby5naXRodWIudG9tbHVjaG93c2tpLk9wZW5EdW5nZW9uc1BsdXMucG5n" width="128" />
+  <img src="https://raw.githubusercontent.com/Link4Electronics/OpenDungeonsPlus-AppImage/refs/heads/main/AppDir/io.github.tomluchowski.OpenDungeonsPlus.png" width="128" />
 </p>
 
 
