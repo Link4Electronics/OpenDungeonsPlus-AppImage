@@ -39,7 +39,7 @@ get-debloated-pkgs --add-common --prefer-nano
 make-aur-package gtk2
 make-aur-package fluxcomp
 make-aur-package freeimage
-PRE_BUILD_CMDS='sed -i "s/build() {/build() {\n  export CFLAGS+=\" -fcommon -Wno-error=incompatible-pointer-types -Wno-implicit-function-declaration\"/" ./PKGBUILD' make-aur-package directfb
+#PRE_BUILD_CMDS='sed -i "s/build() {/build() {\n  export CFLAGS+=\" -fcommon -Wno-error=incompatible-pointer-types -Wno-implicit-function-declaration\"/" ./PKGBUILD' make-aur-package directfb
 make-aur-package rapidxml
 make-aur-package silly
 make-aur-package cegui-git
