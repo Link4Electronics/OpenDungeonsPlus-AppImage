@@ -9,19 +9,38 @@ echo "---------------------------------------------------------------"
 pacman -Syu --noconfirm \
     boost      \
     boost-libs \
+    ccache     \
     cmake      \
+    devil      \
+    doxygen    \
+    freeglut   \
+    glfw       \
+    irrlicht   \
+    libraqm    \
+    lua51      \
+    minizip    \
     ogre       \
     ois        \
+    pcre       \
     pugixml    \
     pybind11   \
     python     \
-    sfml
+    sdl2_image \
+    sfml       \
+    tinyxml    \
+    tinyxml2   \
+    tolua++
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
 get-debloated-pkgs --add-common --prefer-nano
 
 # Comment this out if you need an AUR package
+make-aur-package gtk2
+make-aur-package freeimage
+make-aur-package directfb
+make-aur-package rapidxml
+make-aur-package silly
 make-aur-package cegui
 
 # If the application needs to be manually built that has to be done down here
