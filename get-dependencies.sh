@@ -37,7 +37,7 @@ get-debloated-pkgs --add-common --prefer-nano
 
 # Comment this out if you need an AUR package
 make-aur-package gtk2
-make-aur-package fluxcomp
+#make-aur-package fluxcomp
 make-aur-package freeimage
 #PRE_BUILD_CMDS='sed -i "s/build() {/build() {\n  export CFLAGS+=\" -fcommon -Wno-error=incompatible-pointer-types -Wno-implicit-function-declaration\"/" ./PKGBUILD' make-aur-package directfb
 make-aur-package rapidxml
