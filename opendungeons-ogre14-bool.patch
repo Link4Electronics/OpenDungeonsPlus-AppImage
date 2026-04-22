@@ -1,0 +1,155 @@
+diff --git a/gui/ODSkin.scheme b/gui/ODSkin.scheme
+index f3fc543..a1877a0 100644
+--- a/gui/ODSkin.scheme
++++ b/gui/ODSkin.scheme
+@@ -10,6 +10,7 @@
+     <Font filename="LiberationSans-20.font" name="LiberationSans-20" />
+     <Font filename="MedievalSharp-10.font" name="MedievalSharp-10" />
+     <Font filename="MedievalSharp-12.font" name="MedievalSharp-12" />
++    <Font filename="MedievalSharp-20.font" name="MedievalSharp-20" />
+     <LookNFeel filename="OD.looknfeel" />
+     <WindowRendererSet filename="CEGUICoreWindowRendererSet" />
+     <FalagardMapping lookNFeel="OD/Button" renderer="Core/Button" targetType="CEGUI/PushButton" windowType="OD/Button" />
+diff --git a/gui/fonts/MedievalSharp-20.font b/gui/fonts/MedievalSharp-20.font
+new file mode 100644
+index 0000000..855c100
+--- /dev/null
++++ b/gui/fonts/MedievalSharp-20.font
+@@ -0,0 +1 @@
++<Font autoScaled="false" filename="MedievalSharp-Bold.ttf" name="MedievalSharp-20" nativeHorzRes="800" nativeVertRes="600" size="20" type="FreeType" version="3" />
+diff --git a/shaders/ClaimedTile.frag b/shaders/ClaimedTile.frag
+index c8dbe98..fa0abd5 100644
+--- a/shaders/ClaimedTile.frag
++++ b/shaders/ClaimedTile.frag
+@@ -14,7 +14,7 @@ uniform vec4 lightPos;
+ uniform vec4 cameraPosition;
+ uniform vec4 diffuseSurface;
+ uniform vec4 seatColor;
+-uniform bool shadowingEnabled;
++uniform int shadowingEnabled;
+ in vec2 out_UV0;
+ in vec2 out_UV1;
+ in vec2 out_UV2;
+@@ -34,7 +34,7 @@ void main (void)
+     
+     vec4 shadow = vec4(1.0, 1.0, 1.0,1.0);
+     vec4 tmpVertexPos = VertexPos;
+-    if(shadowingEnabled){
++    if(shadowingEnabled != 0){
+         // compute shadowmap
+         if(tmpVertexPos.z > 0.00001 ){
+             tmpVertexPos /= tmpVertexPos.w;
+diff --git a/shaders/Creature.frag b/shaders/Creature.frag
+index 3bae745..0f3829a 100644
+--- a/shaders/Creature.frag
++++ b/shaders/Creature.frag
+@@ -11,7 +11,7 @@ uniform vec4 lightSpecularColour;
+ uniform vec4 lightPos;
+ uniform vec4 cameraPosition;
+ uniform vec3 ambient;
+-uniform bool shadowingEnabled;
++uniform int shadowingEnabled;
+ in vec2 out_UV0;
+ in vec2 out_UV1;
+ in vec3 FragPos;
+@@ -32,7 +32,7 @@ void main (void)
+     vec4 tmpVertexPos = VertexPos;
+     
+     // compute shadowmap
+-    if(shadowingEnabled){
++    if(shadowingEnabled != 0){
+ 		if(tmpVertexPos.z > epsilon ){
+ 		    tmpVertexPos /= tmpVertexPos.w;
+ 		    shadow = texture(shadowmap, tmpVertexPos.xy); 
+diff --git a/shaders/DCW.frag b/shaders/DCW.frag
+index 6f9ef36..c913320 100644
+--- a/shaders/DCW.frag
++++ b/shaders/DCW.frag
+@@ -13,7 +13,7 @@ uniform vec4 lightPos;
+ uniform vec4 cameraPosition;
+ uniform vec4 diffuseSurface;
+ uniform vec4 seatColor;
+-uniform bool shadowingEnabled;
++uniform int shadowingEnabled;
+ in vec2 out_UV0;
+ in vec2 out_UV1;
+ in vec2 out_UV2;
+@@ -36,7 +36,7 @@ void main (void)
+     vec4 tmpVertexPos = VertexPos;
+     
+     // compute shadowmap
+-    if(shadowingEnabled){
++    if(shadowingEnabled != 0){
+ 		if(tmpVertexPos.z > 0 ){
+ 		    tmpVertexPos /= tmpVertexPos.w;
+ 		    shadow = texture(shadowmap, tmpVertexPos.xy); 
+diff --git a/shaders/DirtTile.frag b/shaders/DirtTile.frag
+index 180656a..fc6b452 100644
+--- a/shaders/DirtTile.frag
++++ b/shaders/DirtTile.frag
+@@ -10,7 +10,7 @@ uniform vec4 lightSpecularColour;
+ uniform vec4 lightPos;
+ uniform vec4 cameraPosition;
+ uniform vec4 diffuseSurface;
+-uniform bool shadowingEnabled;
++uniform int shadowingEnabled;
+ in vec2 out_UV0;
+ in vec2 out_UV1;
+ in vec3 FragPos;
+diff --git a/shaders/DirtTileInstanced.frag b/shaders/DirtTileInstanced.frag
+index 55ca1fc..f4d3b71 100644
+--- a/shaders/DirtTileInstanced.frag
++++ b/shaders/DirtTileInstanced.frag
+@@ -11,7 +11,7 @@ uniform vec4 lightSpecularColour;
+ uniform vec4 lightPos;
+ uniform vec4 cameraPosition;
+ uniform vec4 diffuseSurface;
+-uniform bool shadowingEnabled;
++uniform int shadowingEnabled;
+ in vec2 out_UV0;
+ in vec3 FragPos;
+ in vec4 VertexPos; 
+@@ -36,7 +36,7 @@ void main (void)
+     vec4 tmpVertexPos = VertexPos;
+     
+     // compute shadowmap
+-    if(shadowingEnabled){
++    if(shadowingEnabled != 0){
+ 		if(tmpVertexPos.z > 0 ){
+ 		    tmpVertexPos /= tmpVertexPos.w;
+ 		    shadow = texture(shadowmap, tmpVertexPos.xy); 
+diff --git a/shaders/GoldDistortion.frag b/shaders/GoldDistortion.frag
+index 999f5eb..9976eca 100644
+--- a/shaders/GoldDistortion.frag
++++ b/shaders/GoldDistortion.frag
+@@ -10,7 +10,7 @@ uniform vec4 lightSpecularColour;
+ uniform vec4 lightPos;
+ uniform vec4 cameraPosition;
+ uniform vec4 diffuseSurface;
+-uniform bool shadowingEnabled;
++uniform int shadowingEnabled;
+ in vec2 out_UV0;
+ in vec2 out_UV1;
+ in vec3 FragPos;
+diff --git a/shaders/Room.frag b/shaders/Room.frag
+index 8d00f6a..c21c897 100644
+--- a/shaders/Room.frag
++++ b/shaders/Room.frag
+@@ -10,7 +10,7 @@ uniform vec4 lightDiffuseColour;
+ uniform vec4 lightSpecularColour;
+ uniform vec4 lightPos;
+ uniform vec4 cameraPosition;
+-uniform bool shadowingEnabled;
++uniform int shadowingEnabled;
+ in vec2 out_UV0;
+ in vec2 out_UV1;
+ in vec3 FragPos;
+@@ -31,7 +31,7 @@ void main (void)
+     vec4 tmpVertexPos = VertexPos;
+     
+     // compute shadowmap
+-    if(shadowingEnabled){
++    if(shadowingEnabled != 0){
+ 		if(tmpVertexPos.z > epsilon ){
+ 		    tmpVertexPos /= tmpVertexPos.w;
+ 		    shadow = texture(shadowmap, tmpVertexPos.xy); 
