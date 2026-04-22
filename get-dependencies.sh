@@ -26,6 +26,7 @@ make-aur-package cegui
 # If the application needs to be manually built that has to be done down here
 git clone https://github.com/tomluchowski/OpenDungeonsPlus
 
+mkdir -p ./AppDir/bin
 cmake .. \
     -DCMAKE_BUILD_TYPE=Release \
     -DOD_TREAT_WARNINGS_AS_ERRORS=OFF \
