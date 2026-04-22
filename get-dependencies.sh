@@ -42,4 +42,4 @@ cmake .. \
 make -j$(nproc)
 ls
 mv -v opendungeons-plus ../../AppDir/bin
-mv -v ../levels ../materials ../models ../music ../particles ../sounds ../../AppDir/bin
+mv -v ../levels ../materials ../models ../music ../particles ../shaders ../sounds ../../AppDir/bin
