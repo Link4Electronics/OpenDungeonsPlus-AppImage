@@ -24,11 +24,9 @@ get-debloated-pkgs --add-common --prefer-nano
 make-aur-package cegui
 
 # If the application needs to be manually built that has to be done down here
+git clone https://github.com/tomluchowski/OpenDungeonsPlus
 
-# if you also have to make nightly releases check for DEVEL_RELEASE = 1
-#
-# if [ "${DEVEL_RELEASE-}" = 1 ]; then
-# 	nightly build steps
-# else
-# 	regular build steps
-# fi
+cmake .. \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DOD_TREAT_WARNINGS_AS_ERRORS=OFF \
+    -DPYBIND11_FINDPYTHON=ON
