@@ -10,7 +10,8 @@ pacman -Syu --noconfirm \
     boost      \
     boost-libs \
     cmake      \
-    sfml       \
+    pugixml    \
+    sfml
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
