@@ -24,7 +24,6 @@ pacman -Syu --noconfirm \
     pybind11   \
     python     \
     sdl2_image \
-    sfml       \
     tinyxml    \
     tinyxml2   \
     tolua++
@@ -34,6 +33,7 @@ echo "---------------------------------------------------------------"
 get-debloated-pkgs --add-common --prefer-nano
 
 # Comment this out if you need an AUR package
+make-aur-package sfml2
 make-aur-package gtk2
 make-aur-package fluxcomp
 make-aur-package freeimage
