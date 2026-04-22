@@ -39,10 +39,10 @@ get-debloated-pkgs --add-common --prefer-nano
 make-aur-package gtk2
 make-aur-package fluxcomp
 make-aur-package freeimage
-#make-aur-package directfb
+PRE_BUILD_CMDS='export CFLAGS="$CFLAGS -Wno-error=implicit-function-declaration -fcommon"' make-aur-package directfb
 make-aur-package rapidxml
 make-aur-package silly
-make-aur-package cegui
+PRE_BUILD_CMDS='export CXXFLAGS="$CXXFLAGS -std=c++11"' make-aur-package cegui
 
 # If the application needs to be manually built that has to be done down here
 echo "Making nightly build of OpenDungeonsPlus..."
