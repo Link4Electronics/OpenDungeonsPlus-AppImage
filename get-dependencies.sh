@@ -40,4 +40,6 @@ cmake .. \
     -DOD_TREAT_WARNINGS_AS_ERRORS=OFF \
     -DPYBIND11_FINDPYTHON=ON
 make -j$(nproc)
+ls
 mv -v opendungeons-plus ../../AppDir/bin
+mv -v ../levels ../materials ../models ../music ../particles ../sounds ../../AppDir/bin
