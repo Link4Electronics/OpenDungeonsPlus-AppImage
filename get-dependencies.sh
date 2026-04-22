@@ -35,13 +35,13 @@ get-debloated-pkgs --add-common --prefer-nano
 
 # Comment this out if you need an AUR package
 make-aur-package gtk2
-#make-aur-package fluxcomp
+make-aur-package fluxcomp
 make-aur-package freeimage
-#PRE_BUILD_CMDS='sed -i "s/build() {/build() {\n  export CFLAGS+=\" -fcommon -Wno-error=incompatible-pointer-types -Wno-implicit-function-declaration\"/" ./PKGBUILD' make-aur-package directfb
+PRE_BUILD_CMDS='sed -i "s/build() {/build() {\n  export CFLAGS+=\" -fcommon -Wno-error=incompatible-pointer-types -Wno-implicit-function-declaration\"/" ./PKGBUILD' make-aur-package directfb
 make-aur-package rapidxml
 make-aur-package silly
 make-aur-package boost183
-PRE_BUILD_CMDS='sed -i "s/cmake /cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCEGUI_BUILD_RENDERER_OPENGL=FALSE -DCEGUI_BUILD_RENDERER_OPENGLES=FALSE -DCEGUI_BUILD_RENDERER_OPENGL3=FALSE -DCEGUI_BUILD_IMAGECODEC_FREEIMAGE=FALSE -DCEGUI_OPTION_DEFAULT_IMAGECODEC=OgreRenderer-0 -DCEGUI_SAMPLES_ENABLED=FALSE -DCEGUI_BUILD_PYTHON_MODULES=OFF -DCEGUI_BUILD_STATIC_CONFIGURATION=OFF -DCMAKE_CXX_FLAGS=-std=c++11 /" ./PKGBUILD' make-aur-package cegui-git
+PRE_BUILD_CMDS='sed -i "s/cmake /cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCEGUI_BUILD_RENDERER_DIRECT3D9=FALSE -DCEGUI_BUILD_RENDERER_DIRECT3D10=FALSE -DCEGUI_BUILD_RENDERER_DIRECT3D11=FALSE -DCEGUI_BUILD_RENDERER_OPENGL=FALSE -DCEGUI_BUILD_RENDERER_OPENGLES=FALSE -DCEGUI_BUILD_RENDERER_OPENGLES3=FALSE -DCEGUI_BUILD_RENDERER_OPENGL3=FALSE -DCEGUI_BUILD_IMAGECODEC_FREEIMAGE=FALSE -DCEGUI_OPTION_DEFAULT_IMAGECODEC=OgreRenderer-0 -DCEGUI_SAMPLES_ENABLED=FALSE -DCEGUI_BUILD_PYTHON_MODULES=OFF -DCEGUI_BUILD_STATIC_CONFIGURATION=OFF -DCMAKE_CXX_FLAGS=-std=c++11 /" ./PKGBUILD' make-aur-package cegui-git
 #PRE_BUILD_CMDS='sed -i "s/cmake /cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 /" ./PKGBUILD; export CXXFLAGS="$CXXFLAGS -std=c++11"' make-aur-package cegui
 
 # If the application needs to be manually built that has to be done down here
