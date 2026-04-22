@@ -42,7 +42,7 @@ make-aur-package freeimage
 #PRE_BUILD_CMDS='sed -i "s/build() {/build() {\n  export CFLAGS+=\" -fcommon -Wno-error=incompatible-pointer-types -Wno-implicit-function-declaration\"/" ./PKGBUILD' make-aur-package directfb
 make-aur-package rapidxml
 make-aur-package silly
-make-aur-package cegui-git
+PRE_BUILD_CMDS='sed -i "s/cmake /cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 /" ./PKGBUILD' make-aur-package cegui-git
 #PRE_BUILD_CMDS='sed -i "s/cmake /cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 /" ./PKGBUILD; export CXXFLAGS="$CXXFLAGS -std=c++11"' make-aur-package cegui
 
 # If the application needs to be manually built that has to be done down here
