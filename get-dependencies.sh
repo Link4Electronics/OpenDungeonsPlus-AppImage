@@ -39,7 +39,7 @@ get-debloated-pkgs --add-common --prefer-nano
 make-aur-package gtk2
 make-aur-package fluxcomp
 make-aur-package freeimage
-make-aur-package directfb
+#make-aur-package directfb
 make-aur-package rapidxml
 make-aur-package silly
 make-aur-package cegui
