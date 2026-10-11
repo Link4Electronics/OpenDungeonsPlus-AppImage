@@ -22,15 +22,13 @@ pacman -Syu --noconfirm \
     pcre       \
     pugixml    \
     pybind11   \
-    python     \
-    sdl2_image \
     tinyxml    \
     tinyxml2   \
     tolua++
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
-get-debloated-pkgs --add-common --prefer-nano gtk2-mini
+get-debloated-pkgs --add-common --prefer-nano gtk2-mini sdl2_image-mini
 
 # Comment this out if you need an AUR package
 make-aur-package sfml2
