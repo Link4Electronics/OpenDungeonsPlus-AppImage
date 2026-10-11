@@ -30,11 +30,10 @@ pacman -Syu --noconfirm \
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
-get-debloated-pkgs --add-common --prefer-nano
+get-debloated-pkgs --add-common --prefer-nano gtk2-mini
 
 # Comment this out if you need an AUR package
 make-aur-package sfml2
-make-aur-package gtk2
 make-aur-package fluxcomp
 make-aur-package freeimage
 PRE_BUILD_CMDS='sed -i "s/build() {/build() {\n  export CFLAGS+=\" -fcommon -Wno-error=incompatible-pointer-types -Wno-implicit-function-declaration\"/" ./PKGBUILD' make-aur-package directfb
