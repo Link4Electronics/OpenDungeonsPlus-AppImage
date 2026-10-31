@@ -7,7 +7,7 @@
 [![Latest Stable Release](https://img.shields.io/github/v/release/pkgforge-dev/OpenDungeonsPlus-AppImage)](https://github.com/pkgforge-dev/OpenDungeonsPlus-AppImage/releases/latest)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Link4Electronics/OpenDungeonsPlus-AppImage/refs/heads/main/AppDir/io.github.tomluchowski.OpenDungeonsPlus.png" width="128" />
+  <img src="AppDir/io.github.tomluchowski.OpenDungeonsPlus.png" width="128" />
 </p>
 
 
