@@ -1,0 +1,135 @@
+diff --git a/cegui/include/CEGUI/RendererModules/Ogre/Renderer.h b/cegui/include/CEGUI/RendererModules/Ogre/Renderer.h
+index a0b3363..d5c6406 100644
+--- a/cegui/include/CEGUI/RendererModules/Ogre/Renderer.h
++++ b/cegui/include/CEGUI/RendererModules/Ogre/Renderer.h
+@@ -48,7 +48,7 @@
+ #   pragma warning(disable : 4251)
+ #endif
+ 
+-#if (CEGUI_OGRE_VERSION >= (2 << 16))
++#if (CEGUI_OGRE_VERSION >= (2 << 16)) && (CEGUI_OGRE_VERSION < (13 << 16))
+ // The new Ogre Compositor2 system has to be used since ViewPorts
+ // no longer have the required functionality
+ #define CEGUI_USE_OGRE_COMPOSITOR2
+@@ -56,14 +56,14 @@
+ 
+ // These HLMS Ogre 2.1 fixes are based on Jeremy Richert's patch to CEGUI
+ // 0.8
+-#if (CEGUI_OGRE_VERSION >= ((2 << 16) | (1 << 8) | 0))
++#if (CEGUI_OGRE_VERSION >= ((2 << 16) | (1 << 8) | 0)) && (CEGUI_OGRE_VERSION < (13 << 16))
+ // The HLMS has to be used since fixed pipeline is disabled
+ #define CEGUI_USE_OGRE_HLMS
+ #include <OgreRenderOperation.h>
+ #include <OgreHlmsSamplerblock.h>
+ #endif
+ 
+-#if (CEGUI_OGRE_VERSION >= ((2 << 16) | (1 << 9) | 0))
++#if (CEGUI_OGRE_VERSION >= ((2 << 16) | (1 << 9) | 0)) && (CEGUI_OGRE_VERSION < (13 << 16))
+ #define CEGUI_USE_OGRE_TEXTURE_GPU
+ #endif
+ 
+diff --git a/cegui/src/RendererModules/Ogre/Renderer.cpp b/cegui/src/RendererModules/Ogre/Renderer.cpp
+index b9922c8..cdc3386 100755
+--- a/cegui/src/RendererModules/Ogre/Renderer.cpp
++++ b/cegui/src/RendererModules/Ogre/Renderer.cpp
+@@ -46,6 +46,8 @@
+ 
+ #include <OgreRoot.h>
+ #include <OgreRenderSystem.h>
++#include <OgreTextureManager.h>
++#include <OgreTextureUnitState.h>
+ #ifdef CEGUI_USE_OGRE_TEXTURE_GPU
+ #include <OgreWindow.h>
+ #include <OgreTextureGpuManager.h>
+@@ -87,7 +89,7 @@
+ #endif
+ #endif
+ 
+-#if OGRE_VERSION >= 0x020100
++#if OGRE_VERSION >= 0x020100 && OGRE_VERSION < 0x0D0000
+ #include <CommandBuffer/OgreCbDrawCall.h>
+ #endif
+ 
+@@ -238,6 +240,11 @@ struct OgreRenderer_impl
+ 
+ #endif
+ 
++#if !defined(CEGUI_USE_OGRE_HLMS) && OGRE_VERSION >= 0x0E0000
++    //! Sampler state applied to the GUI texture unit
++    Ogre::SamplerPtr d_sampler;
++#endif
++
+ #ifdef CEGUI_USE_OGRE_HLMS
+     //! OGRE render target
+     //Ogre::RenderTarget* d_renderTarget;
+@@ -766,7 +773,7 @@ void OgreRenderer::beginRendering()
+             d_pimpl->d_previousVP = d_pimpl->d_renderSystem->_getViewport();
+             if ( d_pimpl->d_previousVP && d_pimpl->d_previousVP->getCamera() )
+                 d_pimpl->d_previousProjMatrix =
+-                    d_pimpl->d_previousVP->getCamera()->getProjectionMatrixRS();
++                    d_pimpl->d_previousVP->getCamera()->getProjectionMatrixWithRSDepth();
+         }
+     #endif
+ 
+@@ -1330,7 +1337,7 @@ void OgreRenderer::bindPSO(const Ogre::v1::RenderOperation render_operation)
+     d_pimpl->d_hlmsCache->setMacroblock(const_cast<Ogre::HlmsMacroblock*>(
+             d_pimpl->d_hlmsMacroblock));
+ 
+-	#if OGRE_VERSION >= 0x020100
++	#if OGRE_VERSION >= 0x020100 && OGRE_VERSION < 0x0D0000
+     //! Needed for DX11 in order for InputLayout to be specified right when we get the PSO.
+     Ogre::VertexElement2VecVec elements = render_operation.vertexData->vertexDeclaration->convertToV2();
+     d_pimpl->d_hlmsCache->setVertexFormat( elements, render_operation.operationType, false );
+@@ -1342,7 +1349,7 @@ void OgreRenderer::bindPSO(const Ogre::v1::RenderOperation render_operation)
+     // Bind it
+     d_pimpl->d_renderSystem->_setPipelineStateObject(pso);
+ 
+-	#if OGRE_VERSION >= 0x020100
++	#if OGRE_VERSION >= 0x020100 && OGRE_VERSION < 0x0D0000
+     const Ogre::v1::CbRenderOp cmd( render_operation );
+     d_pimpl->d_renderSystem->_setRenderOperation( &cmd );
+ 	#endif
+@@ -1402,7 +1409,7 @@ static const Ogre::LayerBlendModeEx S_alphaBlendMode =
+ };
+ 
+ //----------------------------------------------------------------------------//
+-#ifndef CEGUI_USE_OGRE_HLMS
++#if !defined(CEGUI_USE_OGRE_HLMS) && OGRE_VERSION < 0x0E0000
+ static const Ogre::TextureUnitState::UVWAddressingMode S_textureAddressMode =
+     {
+         Ogre::TextureUnitState::TAM_CLAMP,
+@@ -1755,9 +1762,21 @@ void OgreRenderer::initialiseTextureStates()
+ #ifndef CEGUI_USE_OGRE_HLMS
+     d_pimpl->d_renderSystem->_setTextureCoordCalculation(0, Ogre::TEXCALC_NONE);
+     d_pimpl->d_renderSystem->_setTextureCoordSet(0, 0);
++#if OGRE_VERSION >= 0x0E0000
++    if (!d_pimpl->d_sampler)
++    {
++        d_pimpl->d_sampler = Ogre::TextureManager::getSingleton().createSampler();
++        d_pimpl->d_sampler->setAddressingMode(Ogre::TAM_CLAMP);
++        d_pimpl->d_sampler->setFiltering(Ogre::FO_LINEAR, Ogre::FO_LINEAR, Ogre::FO_NONE);
++    }
++    d_pimpl->d_renderSystem->_setSampler(0, *d_pimpl->d_sampler);
++#else
+     d_pimpl->d_renderSystem->_setTextureAddressingMode(0, S_textureAddressMode);
++#endif
+     d_pimpl->d_renderSystem->_setTextureMatrix(0, Ogre::Matrix4::IDENTITY);
++#if OGRE_VERSION < 0x0E0000
+     d_pimpl->d_renderSystem->_setTextureUnitFiltering(0, Ogre::FO_LINEAR, Ogre::FO_LINEAR, Ogre::FO_NONE);
++#endif
+     d_pimpl->d_renderSystem->_setAlphaRejectSettings(Ogre::CMPF_ALWAYS_PASS, 0, false);
+     d_pimpl->d_renderSystem->_setTextureBlendMode(0, S_colourBlendMode);
+     d_pimpl->d_renderSystem->_setTextureBlendMode(0, S_alphaBlendMode);
+diff --git a/cegui/src/RendererModules/Ogre/Texture.cpp b/cegui/src/RendererModules/Ogre/Texture.cpp
+index 45367b7..cf0bcde 100644
+--- a/cegui/src/RendererModules/Ogre/Texture.cpp
++++ b/cegui/src/RendererModules/Ogre/Texture.cpp
+@@ -341,7 +341,7 @@ void OgreTexture::loadFromMemory(const void* buffer, const Sizef& buffer_size,
+     const Ogre::PixelBox* pixelBox = new Ogre::PixelBox(static_cast<std::uint32_t>(buffer_size.d_width), static_cast<std::uint32_t>(buffer_size.d_height),
+                                                         1, toOgrePixelFormat(pixel_format), bufferCopy);
+     createEmptyOgreTexture(pixel_format);
+-    d_texture->freeInternalResources();
++    d_texture->unload();
+     d_texture->setWidth(static_cast<std::uint32_t>(buffer_size.d_width));
+     d_texture->setHeight(static_cast<std::uint32_t>(buffer_size.d_height));
+     d_texture->setDepth(1);
