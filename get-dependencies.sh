@@ -9,14 +9,23 @@ echo "---------------------------------------------------------------"
 pacman -Syu --noconfirm \
     boost      \
     cmake      \
+    devil      \
     doxygen    \
     glew       \
+    glfw       \
     glm        \
+    irrlicht   \
+    lua51      \
+    minizip    \
     ogre       \
     ois        \
     openal     \
     pybind11   \
-    swig
+    swig       \
+    tinyxml    \
+    tinyxml2   \
+    tolua++    \
+    xerces-c
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
