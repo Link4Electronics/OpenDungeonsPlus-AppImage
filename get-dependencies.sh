@@ -9,23 +9,15 @@ echo "---------------------------------------------------------------"
 pacman -Syu --noconfirm \
     boost      \
     cmake      \
-    devil      \
     doxygen    \
+    expat      \
     glew       \
-    glfw       \
     glm        \
-    irrlicht   \
-    lua51      \
-    minizip    \
     ogre       \
     ois        \
     openal     \
     pybind11   \
-    swig       \
-    tinyxml    \
-    tinyxml2   \
-    tolua++    \
-    xerces-c
+    swig
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
@@ -51,6 +43,7 @@ echo "Building cegui..."
 echo "---------------------------------------------------------------"
 REPO="https://github.com/tomluchowski/cegui"
 git clone --depth 1 -b v0 "$REPO" ./cegui
+git -C ./cegui apply ../cegui-cmake4.patch
 
 cmake -S ./cegui -B build \
     -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
