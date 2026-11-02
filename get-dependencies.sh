@@ -16,7 +16,7 @@ pacman -Syu --noconfirm \
     glm        \
     irrlicht   \
     lua51      \
-    minizip-ng \
+    minizip    \
     ogre       \
     ois        \
     openal     \
