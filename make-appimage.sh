@@ -12,7 +12,8 @@ export DEPLOY_PYTHON=1
 export DEPLOY_OPENGL=1
 
 # Deploy dependencies
-quick-sharun ./AppDir/bin/opendungeons-plus \
+quick-sharun ./AppDir/bin/opendungeons-plus    \
+    /usr/lib/libopenal.so*                     \
     /usr/lib/cegui-9999.0/*.so                 \
     /usr/lib/OGRE/Codec_STBI.so                \
     /usr/lib/OGRE/Plugin_OctreeSceneManager.so \
