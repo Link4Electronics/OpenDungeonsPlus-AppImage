@@ -10,7 +10,6 @@ pacman -Syu --noconfirm \
     boost      \
     cmake      \
     doxygen    \
-    expat      \
     glew       \
     glm        \
     ogre       \
