@@ -73,7 +73,8 @@ mkdir build && cd build
 cmake .. \
     -DCMAKE_BUILD_TYPE=Release \
     -DOD_TREAT_WARNINGS_AS_ERRORS=OFF \
-    -DPYBIND11_FINDPYTHON=ON
+    -DPYBIND11_FINDPYTHON=ON \
+    -DSFML_ROOT=/opt/sfml2
 make -j$(nproc)
 mv -v opendungeons-plus plugins.cfg resources.cfg ../../AppDir/bin
 mv -v ../config ../gui ../levels ../materials ../models ../music ../particles ../python ../scripts ../shaders ../sounds ../../AppDir/bin
