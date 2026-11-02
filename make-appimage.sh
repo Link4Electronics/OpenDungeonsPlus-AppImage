@@ -23,6 +23,8 @@ quick-sharun ./AppDir/bin/opendungeons-plus    \
 echo 'SHARUN_WORKING_DIR=${SHARUN_DIR}/bin' >> ./AppDir/.env
 echo 'OGRE_PLUGIN_DIR=${SHARUN_DIR}/lib/OGRE' >> ./AppDir/.env
 echo 'CEGUI_MODULE_DIR=${SHARUN_DIR}/lib/cegui-0.9999' >> ./AppDir/.env
+# this app has problems with other locales breaking physics
+echo 'LC_ALL=C.UTF-8' >> ./AppDir/.env
 
 # Turn AppDir into AppImage
 quick-sharun --make-appimage
