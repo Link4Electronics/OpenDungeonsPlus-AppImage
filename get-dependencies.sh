@@ -15,7 +15,6 @@ pacman -Syu --noconfirm \
     ogre       \
     ois        \
     pybind11   \
-    python     \
     swig       \
     systemd
 
