@@ -84,3 +84,4 @@ cp /usr/share/OGRE-*/Media/Main/OgreUnifiedShader.h  ../../AppDir/bin/RTShaderLi
 cp /usr/share/OGRE-*/Media/Main/GLSL_GL3Support.glsl ../../AppDir/bin/RTShaderLib
 cp /usr/share/OGRE-*/Media/Main/HLSL_SM4Support.hlsl ../../AppDir/bin/RTShaderLib
 sed -i -e 's|^FileSystem=.*/share/OGRE/Media/|FileSystem=|' -e '/^FileSystem=RTShaderLib\//d' ../../AppDir/bin/resources.cfg
+sed -i 's|^Plugin=RenderSystem_GL3Plus$|Plugin=RenderSystem_GL|' ../../AppDir/bin/plugins.cfg
