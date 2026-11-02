@@ -66,6 +66,7 @@ echo "---------------------------------------------------------------"
 REPO="https://github.com/tomluchowski/OpenDungeonsPlus"
 VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
 git clone --depth 1 "$REPO" ./OpenDungeonsPlus
+git -C ./OpenDungeonsPlus apply ../opendungeons-ogre14-bool.patch
 echo "$VERSION" > ~/version
 
 mkdir -p ./AppDir/bin
