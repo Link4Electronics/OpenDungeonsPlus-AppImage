@@ -20,13 +20,10 @@ echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
 get-debloated-pkgs --add-common --prefer-nano
 
-# Comment this out if you need an AUR package
-make-aur-package sfml2
-#make-aur-package boost183
+make-aur-package --chaotic-aur sfml2
 PRE_BUILD_CMDS='sed -i "s/cmake /cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCEGUI_BUILD_RENDERER_DIRECT3D11=FALSE -DCEGUI_BUILD_RENDERER_OPENGL=FALSE -DCEGUI_BUILD_RENDERER_OPENGLES=FALSE -DCEGUI_BUILD_RENDERER_OPENGL3=FALSE -DCEGUI_BUILD_IMAGECODEC_STB=TRUE -DCEGUI_BUILD_PYTHON_MODULES_SWIG=FALSE -DCEGUI_BUILD_STATIC_CONFIGURATION=OFF -DCMAKE_CXX_FLAGS=-std=c++11 /" ./PKGBUILD' make-aur-package cegui-git
 #PRE_BUILD_CMDS='sed -i "s/cmake /cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 /" ./PKGBUILD; export CXXFLAGS="$CXXFLAGS -std=c++11"' make-aur-package cegui
 
-# If the application needs to be manually built that has to be done down here
 echo "Making nightly build of OpenDungeonsPlus..."
 echo "---------------------------------------------------------------"
 REPO="https://github.com/tomluchowski/OpenDungeonsPlus"
