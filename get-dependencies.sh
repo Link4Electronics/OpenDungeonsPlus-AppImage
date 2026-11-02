@@ -54,6 +54,7 @@ cmake -S ./cegui -B build \
     -DCEGUI_BUILD_RENDERER_OPENGL3=FALSE \
     -DCEGUI_BUILD_IMAGECODEC_STB=TRUE \
     -DCEGUI_BUILD_PYTHON_MODULES_SWIG=FALSE \
+    -DCEGUI_BUILD_PYTHON_MODULES_PYPLUSPLUS=FALSE \
     -DCEGUI_BUILD_STATIC_CONFIGURATION=OFF \
     -DCMAKE_CXX_STANDARD=17
 cmake --build build -j$(nproc)
@@ -72,7 +73,8 @@ mkdir build && cd build
 cmake .. \
     -DCMAKE_BUILD_TYPE=Release \
     -DOD_TREAT_WARNINGS_AS_ERRORS=OFF \
-    -DPYBIND11_FINDPYTHON=ON
+    -DPYBIND11_FINDPYTHON=ON \
+    -DSFML_ROOT=/opt/sfml2
 make -j$(nproc)
 mv -v opendungeons-plus plugins.cfg resources.cfg ../../AppDir/bin
 mv -v ../config ../gui ../levels ../materials ../models ../music ../particles ../python ../scripts ../shaders ../sounds ../../AppDir/bin
