@@ -40,25 +40,23 @@ cmake --install build-sfml
 
 echo "Building cegui..."
 echo "---------------------------------------------------------------"
-REPO="https://github.com/cegui/cegui"
-git clone --depth 1 "$REPO" ./cegui
-git -C ./cegui apply ../cegui-ogre14.patch
+REPO="https://github.com/tomluchowski/cegui"
+git clone --depth 1 -b v0 "$REPO" ./cegui
 
 cmake -S ./cegui -B build \
     -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCEGUI_LIB_INSTALL_DIR=lib \
     -DCEGUI_BUILD_RENDERER_DIRECT3D11=FALSE \
     -DCEGUI_BUILD_RENDERER_OPENGL=FALSE \
     -DCEGUI_BUILD_RENDERER_OPENGLES=FALSE \
     -DCEGUI_BUILD_RENDERER_OPENGL3=FALSE \
     -DCEGUI_BUILD_IMAGECODEC_STB=TRUE \
-    -DCEGUI_BUILD_PYTHON_MODULES_SWIG=FALSE \
-    -DCEGUI_BUILD_PYTHON_MODULES_PYPLUSPLUS=FALSE \
+    -DCEGUI_BUILD_PYTHON_MODULES=FALSE \
     -DCEGUI_BUILD_APPLICATION_TEMPLATES=FALSE \
-    -DCEGUI_BUILD_SAMPLES=FALSE \
-    -DCEGUI_BUILD_STATIC_CONFIGURATION=OFF \
-    -DCMAKE_CXX_STANDARD=17
+    -DCEGUI_SAMPLES_ENABLED=FALSE \
+    -DCEGUI_BUILD_STATIC_CONFIGURATION=OFF
 cmake --build build -j$(nproc)
 cmake --install build
 

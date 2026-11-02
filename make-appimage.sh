@@ -14,7 +14,7 @@ export DEPLOY_OPENGL=1
 # Deploy dependencies
 quick-sharun ./AppDir/bin/opendungeons-plus    \
     /usr/lib/libopenal.so*                     \
-    /usr/lib/cegui-9999.0/*.so                 \
+    /usr/lib/cegui-0.9999/*.so                 \
     /usr/lib/OGRE/Codec_STBI.so                \
     /usr/lib/OGRE/Plugin_OctreeSceneManager.so \
     /usr/lib/OGRE/Plugin_ParticleFX.so         \
