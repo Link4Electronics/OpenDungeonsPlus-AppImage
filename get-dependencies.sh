@@ -80,4 +80,7 @@ make -j$(nproc)
 mv -v opendungeons-plus plugins.cfg resources.cfg ../../AppDir/bin
 mv -v ../config ../gui ../levels ../materials ../models ../music ../particles ../python ../scripts ../shaders ../sounds ../../AppDir/bin
 cp -r /usr/share/OGRE-*/Media/RTShaderLib ../../AppDir/bin
+cp /usr/share/OGRE-*/Media/Main/OgreUnifiedShader.h  ../../AppDir/bin/RTShaderLib
+cp /usr/share/OGRE-*/Media/Main/GLSL_GL3Support.glsl ../../AppDir/bin/RTShaderLib
+cp /usr/share/OGRE-*/Media/Main/HLSL_SM4Support.hlsl ../../AppDir/bin/RTShaderLib
 sed -i -e 's|^FileSystem=.*/share/OGRE/Media/|FileSystem=|' -e '/^FileSystem=RTShaderLib\//d' ../../AppDir/bin/resources.cfg

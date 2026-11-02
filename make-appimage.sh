@@ -21,8 +21,8 @@ quick-sharun ./AppDir/bin/opendungeons-plus    \
     /usr/lib/OGRE/RenderSystem_GL.so           \
     /usr/lib/OGRE/RenderSystem_GL3Plus.so
 echo 'SHARUN_WORKING_DIR=${SHARUN_DIR}/bin' >> ./AppDir/.env
-echo 'OGRE_PLUGIN_DIR=${SHARUN_DIR}/lib' >> ./AppDir/.env
-echo 'CEGUI_MODULE_DIR=${SHARUN_DIR}/lib' >> ./AppDir/.env
+echo 'OGRE_PLUGIN_DIR=${SHARUN_DIR}/lib/OGRE' >> ./AppDir/.env
+echo 'CEGUI_MODULE_DIR=${SHARUN_DIR}/lib/cegui-0.9999' >> ./AppDir/.env
 
 # Turn AppDir into AppImage
 quick-sharun --make-appimage
