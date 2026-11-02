@@ -10,14 +10,11 @@ pacman -Syu --noconfirm \
     boost      \
     cmake      \
     doxygen    \
-    expat      \
     ninja      \
     ogre       \
     ois        \
     pybind11   \
-    python     \
-    swig       \
-    systemd
+    swig
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
