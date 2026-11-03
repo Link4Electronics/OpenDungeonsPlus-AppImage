@@ -1,0 +1,13 @@
+diff --git a/source/render/ODFrameListener.cpp b/source/render/ODFrameListener.cpp
+index 0542f5f..e01d042 100755
+--- a/source/render/ODFrameListener.cpp
++++ b/source/render/ODFrameListener.cpp
+@@ -488,7 +488,7 @@ bool ODFrameListener::frameStarted(const Ogre::FrameEvent& evt)
+ void ODFrameListener::renderQueueStarted(Ogre::uint8 queueGroupId, const Ogre::String& invocation,
+     bool&)
+ {
+-    if(queueGroupId == RenderManager::OD_RENDER_QUEUE_ID_GUI && invocation.empty())
++    if(queueGroupId == RenderManager::OD_RENDER_QUEUE_ID_GUI)
+     {
+         Ogre::Root::getSingleton().getRenderSystem()->clearFrameBuffer(Ogre::FBT_DEPTH);
+         CEGUI::System::getSingleton().renderAllGUIContexts();
