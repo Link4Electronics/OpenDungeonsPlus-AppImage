@@ -42,7 +42,7 @@ echo "Building cegui..."
 echo "---------------------------------------------------------------"
 REPO="https://github.com/tomluchowski/cegui"
 git clone --depth 1 -b v0 "$REPO" ./cegui
-git -C ./cegui apply ../cegui-cmake4.patch
+git -C ./cegui apply ../patches/cegui-cmake4.patch
 
 cmake -S ./cegui -B build \
     -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
@@ -66,8 +66,8 @@ echo "---------------------------------------------------------------"
 REPO="https://github.com/tomluchowski/OpenDungeonsPlus"
 VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
 git clone --depth 1 "$REPO" ./OpenDungeonsPlus
-git -C ./OpenDungeonsPlus apply ../opendungeons-ogre14-bool.patch
-git -C ./OpenDungeonsPlus apply ../opendungeons-ogre14-gui.patch
+git -C ./OpenDungeonsPlus apply ../patches/opendungeons-ogre14-bool.patch
+git -C ./OpenDungeonsPlus apply ../patches/opendungeons-ogre14-gui.patch
 echo "$VERSION" > ~/version
 
 mkdir -p ./AppDir/bin
